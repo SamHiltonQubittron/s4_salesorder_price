@@ -1,0 +1,39 @@
+<mvc:View controllerName="zsalesapp.zsalesapp.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+    	xmlns:l="sap.ui.layout">
+    
+    <f:SimpleForm id="SimpleFormChange480_Trial"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			title="Price Details"
+			labelSpanXL="4"
+			labelSpanL="4"
+			labelSpanM="4"
+			labelSpanS="12"
+			adjustLabelSpan="false"
+			emptySpanXL="0"
+			emptySpanL="0"
+			emptySpanM="0"
+			emptySpanS="0"
+			columnsXL="3"
+			columnsL="2"
+			columnsM="2"
+			singleContainerFullSize="false" >
+			<f:content>
+				<core:Title id="_IDGenTitle1"  />
+				<Label id="_IDGenLabel" text="Billing Type Price" />
+				<Input id="_IDGenInput" value="{dataModel>/PriceDetails/0/Subtotal1Amount}" />
+				<Label id="_IDGenLabel1" text="Shift Price RG" />
+				<Input id="_IDGenInput1" value="{dataModel>/PriceDetails/0/YY1_Shift1PriceRG_SDI}">
+                		</Input>			
+				<Label id="_IDGenLabel4" text="Shift Total Hour" />
+				<Input id="_IDGenInput5" value="{dataModel>/PriceDetails/0/YY1_Shift1TotalHourRG_SDI}" />
+			
+				
+			</f:content>
+		</f:SimpleForm>
+    
+</mvc:View>

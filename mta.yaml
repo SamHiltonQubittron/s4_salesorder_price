@@ -1,0 +1,114 @@
+_schema-version: 3.3.0
+ID: zsalesapp
+description: An SAP Fiori application.
+version: 0.0.1
+modules:
+- name: zsalesapp-destination-content
+  type: com.sap.application.content
+  requires:
+  - name: zsalesapp-destination-service
+    parameters:
+      content-target: true
+  - name: zsalesapp-repo-host
+    parameters:
+      service-key:
+        name: zsalesapp-repo-host-key
+  - name: uaa_zsalesapp
+    parameters:
+      service-key:
+        name: uaa_zsalesapp-key
+  parameters:
+    content:
+      instance:
+        destinations:
+        - Name: zsalesapp_html_repo_host
+          ServiceInstanceName: zsalesapp-html5-srv
+          ServiceKeyName: zsalesapp-repo-host-key
+          sap.cloud.service: zsalesapp
+        - Authentication: OAuth2UserTokenExchange
+          Name: zsalesapp_uaa_zsalesapp
+          ServiceInstanceName: zsalesapp-xsuaa-service
+          ServiceKeyName: uaa_zsalesapp-key
+          sap.cloud.service: zsalesapp
+        existing_destinations_policy: ignore
+  build-parameters:
+    no-source: true
+- name: zsalesapp-app-content
+  type: com.sap.application.content
+  path: .
+  requires:
+  - name: zsalesapp-repo-host
+    parameters:
+      content-target: true
+  build-parameters:
+    build-result: resources
+    requires:
+    - artifacts:
+      - zsalesapp.zip
+      name: zsalesapp
+      target-path: resources/
+    - artifacts:
+      - zsalesappzsalesapp.zip
+      name: zsalesappzsalesapp
+      target-path: resources/
+- name: zsalesapp
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm ci
+    - npm run build:cf
+    supported-platforms: []
+- name: zsalesappzsalesapp
+  type: html5
+  path: .
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+resources:
+- name: zsalesapp-repo-host
+  type: org.cloudfoundry.managed-service
+  parameters:
+    service: html5-apps-repo
+    service-name: zsalesapp-html5-srv
+    service-plan: app-host
+- name: zsalesapp-destination-service
+  type: org.cloudfoundry.managed-service
+  parameters:
+    config:
+      HTML5Runtime_enabled: true
+      init_data:
+        instance:
+          destinations:
+          - Authentication: NoAuthentication
+            Name: ui5
+            ProxyType: Internet
+            Type: HTTP
+            URL: https://ui5.sap.com
+          existing_destinations_policy: update
+      version: 1.0.0
+    service: destination
+    service-name: zsalesapp-destination-service
+    service-plan: lite
+- name: uaa_zsalesapp
+  type: org.cloudfoundry.managed-service
+  parameters:
+    path: ./xs-security.json
+    service: xsuaa
+    service-name: zsalesapp-xsuaa-service
+    service-plan: application
+parameters:
+  deploy_mode: html5-repo
+  enable-parallel-deployments: true
+build-parameters:
+  before-all:
+  - builder: custom
+    commands:
+    - npm ci
+    - npx cds build --production
