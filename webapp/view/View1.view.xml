@@ -29,9 +29,18 @@
 				<Label id="_IDGenLabel1" text="Shift Price RG" />
 				<Input id="_IDGenInput1" value="{dataModel>/PriceDetails/0/YY1_Shift1PriceRG_SDI}">
                 		</Input>			
-				<Label id="_IDGenLabel4" text="Shift Total Hour" />
-				<Input id="_IDGenInput5" value="{dataModel>/PriceDetails/0/YY1_Shift1TotalHourRG_SDI}" />
-			
+				<Label id="_IDGenLabel2"  text="Shift Total Hour" />
+				<Input id="_IDGenInput3"  value="{dataModel>/PriceDetails/0/YY1_Shift1TotalHourRG_SDI}" />
+				<Label id="_IDGenLabel3"  text="Day 1 Shift 1 RG" />
+				<Input id="_IDGenInput4"  value="{dataModel>/PriceDetails/0/YY1_Shift1TotalHourRG_SDI}" />
+				<Label id="_IDGenLabel4"  text="Day 1 Shift 1 Overtime" />
+				<Input id="_IDGenInput5"  value="{dataModel>/PriceDetails/0/YY1_Shift1TotalHourRG_SDI}" />
+				<Label id="_IDGenLabel5"  text="Day 1 Shift 2 RG" />
+				<Input id="_IDGenInput6"  value="{dataModel>/PriceDetails/0/YY1_Shift1TotalHourRG_SDI}" />
+				<Label id="_IDGenLabel6"  text="Day 1 Shift 2 Overtime" />
+				<Input id="_IDGenInput7"  value="{dataModel>/PriceDetails/0/YY1_Shift1TotalHourRG_SDI}" />
+				<Label id="_IDGenLabel7"  text="Day 1 Shift 2 DoubleTime " />
+				<Input id="_IDGenInput8"  value="{dataModel>/PriceDetails/0/YY1_Shift1TotalHourRG_SDI}" />
 				
 			</f:content>
 		</f:SimpleForm>
